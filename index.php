@@ -2,24 +2,17 @@
 require_once "includes/db.php";
 require_once "equipe.php";
 require_once "joueur.php";
+include "includes/header.php";
 
 // Récupérer les joueurs
 $players = Joueur::getAll($pdo);
 
-var_dump($players);
 
 // Récupérer les équipes
 $teams = Equipe::getAll($pdo);
 
 
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Liste des joueurs</title>
-</head>
-<body>
     <h1>Liste des joueurs</h1>
     <a href="ajouter_joueur.php"> Ajouter un joueur</a>
     <table border="1" cellpadding="8"> <?php // tableau css pour la présentation/c'est les catégories?>

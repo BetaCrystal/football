@@ -1,5 +1,10 @@
 <?php
 include "includes/db.php";
+require_once "equipe.php";
+if ($_GET['id']){
+        Equipe::delete($pdo, $_GET['id']);
+}
 
-
+header("Location: index.php");
+exit;
 ?>

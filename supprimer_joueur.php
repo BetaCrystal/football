@@ -1,10 +1,9 @@
 <?php
 require_once "includes/db.php";
+require_once "joueur.php";
 
-$id = $_GET['id'] ?? null; //supprimer un joueur par son ID
-if ($id) {
-    $stmt = $pdo->prepare("DELETE FROM player WHERE id = ?");
-    $stmt->execute([$id]);
+if ($_GET['id']){
+    Joueur::delete($pdo, $_GET['id']);
 }
 
 header("Location: index.php");

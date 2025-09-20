@@ -41,9 +41,9 @@ class Joueur
         if ($row) {
             return new Joueur(
                 $row['id'],
-                $row['lastname'],
-                $row['firstname'],
-                $row['birthdate'],
+                $row['last_name'],
+                $row['first_name'],
+                $row['birth_date'],
                 $row['picture']
             );
         }
@@ -66,7 +66,7 @@ class Joueur
     public static function update(PDO $pdo, int $id, string $nom, string $prenom, string $dateNaissance, string $photo): void //mettre à jour les infos d'un joueur
     {
         $sql = "UPDATE player
-                SET lastname = :nom, firstname = :prenom, birthdate = :birthdate, picture = :photo
+                SET last_name = :nom, first_name = :prenom, birth_date = :birthdate, picture = :photo
                 WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
