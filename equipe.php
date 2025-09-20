@@ -27,4 +27,27 @@ class Equipe
         $stmt = $pdo->prepare("INSERT INTO team (name) VALUES (:nom)");
         $stmt->execute([':nom' => $nom]);
     }
+
+        public static function delete(PDO $pdo, int $id): void
+        {
+                $stmt = $pdo->prepare("DELETE FROM team WHERE id = :id");
+                $stmt->execute([':id' => $id]);
+        }
+
+        public static function getById(PDO $pdo, int $id): ?Equipe
+        {
+                $stmt = $pdo->prepare("SELECT * FROM team WHERE id = :id");
+                $stmt->execute([':id' => $id]);
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($row) {
+                        return new Equipe($row['id'], $row['name']);
+                }
+                return null;
+        }
+
+        public static function update(PDO $pdo, int $id, string $nom): void
+        {
+                $stmt = $pdo->prepare("UPDATE team SET name = :nom WHERE id = :id");
+                $stmt->execute([':nom' => $nom, ':id' => $id]);
+        }
 }
