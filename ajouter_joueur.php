@@ -1,6 +1,7 @@
 <?php
 require_once "includes/db.php";
 require_once "joueur.php";
+include "includes/header.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     Joueur::create($pdo, $_POST['nom'], $_POST['prenom'], $_POST['birth_date'], $_POST['picture']);
@@ -8,14 +9,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: index.php");
     exit;
 }
+
+
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Ajouter un joueur</title>
-</head>
-<body>
     <h1>Ajouter un joueur</h1>
     <form method="post">
         <label>Prénom :</label>
@@ -32,5 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <button type="submit">Ajouter</button>
     </form>
-</body>
-</html>
+<?php
+include "includes/footer.php";
+?>

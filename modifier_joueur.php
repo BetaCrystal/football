@@ -1,5 +1,7 @@
 <?php
 require_once "includes/db.php";
+include "includes/header.php";
+require_once "joueur.php";
 
 $id = $_GET['id'] ?? null;
 if (!$id) {
@@ -7,50 +9,34 @@ if (!$id) {
 }
 
 // Récupérer joueur
-$stmt = $pdo->prepare("SELECT * FROM player WHERE id = ?");
-$stmt->execute([$id]);
-$player = $stmt->fetch(PDO::FETCH_ASSOC);
+$player = Joueur::getById($pdo, $id);
 
 if (!$player) {
     die("Joueur introuvable");
 }
 
-// Mise à jour dans la base de données 
+// Mise à jour dans la base de données
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $firstname = $_POST["first_name"];
-    $lastname = $_POST["last_name"];
-    $birthdate = $_POST["birth_date"];
-    $picture = $_POST["picture"];
-
-    $sql = "UPDATE player SET first_name=?, last_name=?, birth_date=?, picture=? WHERE id=?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$firstname, $lastname, $birthdate, $picture, $id]);
+        Joueur::update($pdo, $id, $_POST['nom'], $_POST['prenom'], $_POST['birthdate'], $_POST['photo']);
 
     header("Location: index.php");
     exit;
 }
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Modifier joueur</title>
-</head>
-<body>
     <h1>Modifier joueur</h1>
     <form method="post">
         <label>Prénom :</label>
-        <input type="text" name="firstname" value="<?= htmlspecialchars($player['first_name']) ?>" required><br>
-        
+        <input type="text" name="prenom" value="<?= htmlspecialchars($player->prenom) ?>" required><br>
+
         <label>Nom :</label>
-        <input type="text" name="lastname" value="<?= htmlspecialchars($player['last_name']) ?>" required><br>
-        
+        <input type="text" name="nom" value="<?= htmlspecialchars($player->nom) ?>" required><br>
+
         <label>Date de naissance :</label>
-        <input type="date" name="birthdate" value="<?= $player['birth_date'] ?>"><br>
-        
+        <input type="date" name="birthdate" value="<?= $player->dateNaissance->format('d/m/Y') ?>"><br>
+
         <label>Photo (URL) :</label>
-        <input type="text" name="picture" value="<?= htmlspecialchars($player['picture']) ?>"><br><br>
-        
+        <input type="text" name="photo" value="<?= htmlspecialchars($player->photo) ?>"><br><br>
+
         <button type="submit">Enregistrer</button>
     </form>
 </body>
