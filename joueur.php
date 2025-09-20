@@ -7,14 +7,14 @@ class Joueur
     public DateTime $dateNaissance;
     public string $photo;
 
-    public function __construct($id, $nom, $prenom, $dateNaissance, $photo)
-    {
-        $this->id = $id;
-        $this->nom = $nom;
-        $this->prenom = $prenom;
-        $this->dateNaissance = new DateTime($dateNaissance);
-        $this->photo = $photo;
-    }
+    public function __construct(int $id, string $nom, string $prenom, string $dateNaissance, string $photo)
+{
+    $this->id = $id;
+    $this->nom = $nom;
+    $this->prenom = $prenom;
+    $this->dateNaissance = new DateTime($dateNaissance);
+    $this->photo = $photo;
+}
 
     public static function getAll(PDO $pdo): array
     {
@@ -63,20 +63,20 @@ class Joueur
         ]);
     }
 
-    public static function update(PDO $pdo, int $id, string $nom, string $prenom, string $dateNaissance, string $photo): void //mettre à jour les infos d'un joueur
-    {
-        $sql = "UPDATE player
-                SET last_name = :nom, first_name = :prenom, birth_date = :birthdate, picture = :photo
-                WHERE id = :id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([
-            ':id' => $id,
-            ':nom' => $nom,
-            ':prenom' => $prenom,
-            ':birthdate' => $dateNaissance,
-            ':photo' => $photo
-        ]);
-    }
+   public static function update(PDO $pdo, int $id, string $nom, string $prenom, string $dateNaissance, string $photo): bool
+{
+    $sql = "UPDATE player
+            SET last_name = :nom, first_name = :prenom, birth_date = :birth_date, picture = :photo
+            WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute([
+        ':id' => $id,
+        ':nom' => $nom,
+        ':prenom' => $prenom,
+        ':birth_date' => $dateNaissance,
+        ':photo' => $photo
+    ]);
+}
 
     public static function delete(PDO $pdo, int $id): void // supprimer un joueur de la base de données
     {
