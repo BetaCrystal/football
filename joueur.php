@@ -18,7 +18,7 @@ class Joueur
 
     public static function getAll(PDO $pdo): array
     {
-        $stmt = $pdo->query("SELECT * FROM player ORDER BY lastname");
+        $stmt = $pdo->query("SELECT * FROM player ORDER BY last_name");
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $result = [];
         foreach ($rows as $row) {
@@ -52,20 +52,20 @@ class Joueur
 
     public static function create(PDO $pdo, string $nom, string $prenom, string $dateNaissance, string $photo): void //Créer un joueur
     {
-        $sql = "INSERT INTO player (lastname, firstname, birthdate, picture) 
-                VALUES (:nom, :prenom, :birthdate, :photo)";
+        $sql = "INSERT INTO player (last_name, first_name, birth_date, picture)
+                VALUES (:nom, :prenom, :birth_date, :photo)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             ':nom' => $nom,
             ':prenom' => $prenom,
-            ':birthdate' => $dateNaissance,
+            ':birth_date' => $dateNaissance,
             ':photo' => $photo
         ]);
     }
 
     public static function update(PDO $pdo, int $id, string $nom, string $prenom, string $dateNaissance, string $photo): void //mettre à jour les infos d'un joueur
     {
-        $sql = "UPDATE player 
+        $sql = "UPDATE player
                 SET lastname = :nom, firstname = :prenom, birthdate = :birthdate, picture = :photo
                 WHERE id = :id";
         $stmt = $pdo->prepare($sql);
