@@ -2,6 +2,7 @@
 require_once "includes/db.php";
 require_once "equipe.php";
 require_once "joueur.php";
+require_once "personnel.php";
 include "includes/header.php";
 
 // Récupérer les joueurs
@@ -11,7 +12,8 @@ $players = Joueur::getAll($pdo);
 // Récupérer les équipes
 $teams = Equipe::getAll($pdo);
 
-
+// Récupérer le personnel
+$staff = Personnel::getAll($pdo);
 ?>
     <h1>Liste des joueurs</h1>
     <a href="ajouter_joueur.php"> Ajouter un joueur</a>
@@ -62,5 +64,35 @@ $teams = Equipe::getAll($pdo);
         </tr>
         <?php endforeach; ?>
     </table>
-</body>
-</html>
+    <h1>Liste du personnel</h1>
+    <a href="ajouter_personnel.php"> Ajouter un membre du personnel</a>
+    <table border="1" cellpadding="2">
+        <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Rôle</th>
+                <th>Photo</th>
+        </tr>
+        <?php foreach ($staff as $member): ?>
+        <tr>
+                <td><?= $member->id ?></td>
+                <td><?= htmlspecialchars($member->nom) ?></td>
+                <td><?= htmlspecialchars($member->prenom) ?></td>
+                <td><?= htmlspecialchars($member->role) ?></td>
+                <td>
+                        <?php if (!empty($member->photo)): ?>
+                        <img src="<?= $member->photo ?>" width="50">
+                        <?php else: ?>
+                        -
+                        <?php endif; ?>
+                </td>
+                <td>
+                        <a href="modifier_personnel.php?id=<?= $member->id ?>"> Modifier</a> |
+                        <a href="supprimer_personnel.php?id=<?= $member->id ?>" onclick="return confirm('Supprimer ce membre du personnel ?');"> Supprimer</a>
+                </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+
+<?php include "includes/footer.php"; ?>
