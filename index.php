@@ -3,6 +3,7 @@ require_once "includes/db.php";
 require_once "equipe.php";
 require_once "joueur.php";
 require_once "personnel.php";
+require_once "appartenance.php";
 include "includes/header.php";
 
 // Récupérer les joueurs
@@ -14,6 +15,10 @@ $teams = Equipe::getAll($pdo);
 
 // Récupérer le personnel
 $staff = Personnel::getAll($pdo);
+
+
+// Récupérer les appartenances
+$appartenances = Appartenance::getAll($pdo);
 ?>
     <h1>Liste des joueurs</h1>
     <a href="ajouter_joueur.php"> Ajouter un joueur</a>
@@ -24,6 +29,7 @@ $staff = Personnel::getAll($pdo);
             <th>Prénom</th>
             <th>Date de naissance</th>
             <th>Photo</th>
+            <th>Equipe(s)</th>
             <th>Actions</th>
         </tr>
         <?php foreach ($players as $player): ?>
@@ -39,6 +45,7 @@ $staff = Personnel::getAll($pdo);
                     -
                 <?php endif; ?>
             </td>
+            <td><?= Appartenance::hasTeam($pdo, $player->id) ?></td>
             <td>
                 <a href="modifier_joueur.php?id=<?= $player->id ?>"> Modifier</a> |
                 <a href="supprimer_joueur.php?id=<?= $player->id ?>" onclick="return confirm('Supprimer ce joueur ?');"> Supprimer</a>
