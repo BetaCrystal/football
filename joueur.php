@@ -50,8 +50,8 @@ class Joueur
         return null;
     }
 
-    public static function create(PDO $pdo, string $nom, string $prenom, string $dateNaissance, string $photo): void //Créer un joueur
-    {
+    public static function create(PDO $pdo, string $nom, string $prenom, string $dateNaissance, string $photo): void //Créer un joueur de type Joueur (enlever les parametres)
+    { //faire une classe PDO à hériter
         $sql = "INSERT INTO player (last_name, first_name, birth_date, picture)
                 VALUES (:nom, :prenom, :birth_date, :photo)";
         $stmt = $pdo->prepare($sql);

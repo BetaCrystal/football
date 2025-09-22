@@ -7,7 +7,7 @@ class MatchFoot
     public DateTime $dateMatch;
     public string $ville;
     public int $teamId;
-    public int $opponentId;
+    public int $opponentId; // ref appartenances, faire dossier par typologie, faire jeu d'essais
 
     public function __construct(
         int $id,
