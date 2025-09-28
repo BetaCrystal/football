@@ -1,7 +1,7 @@
 <?php
 include "includes/db.php";
 include "includes/header.php";
-require_once "personnel.php";
+require_once "classes/Personnel.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
         Personnel::create($pdo, $_POST['nom'], $_POST['prenom'], $_POST['photo'], $_POST['role']);
@@ -23,7 +23,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" name="photo"><br>
 
                 <label>Rôle :</label>
-                <input type="text" name="role"><br><br>
+                <select name="role">
+                        <option value="Entraîneur">Entraîneur</option>
+                        <option value="Préparateur">Préparateur</option>
+                        <option value="Analyste">Analyste</option>
+                </select>
+
+                        <br><br>
 
                 <button type="submit">Ajouter</button>
         </form>

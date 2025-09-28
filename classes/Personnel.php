@@ -1,19 +1,15 @@
 <?php
-class Personnel
+
+require_once 'Personne.php';
+
+class Personnel extends Personne
 {
-    public int $id;
-    public string $nom;
-    public string $prenom;
     public string $role;
-    public string $photo;
 
     public function __construct($id, $nom, $prenom, $role, $photo)
     {
-        $this->id = $id;
-        $this->nom = $nom;
-        $this->prenom = $prenom;
+        parent::__construct($id, $nom, $prenom, $photo);
         $this->role = $role;
-        $this->photo = $photo;
     }
 
     public static function getAll(PDO $pdo): array

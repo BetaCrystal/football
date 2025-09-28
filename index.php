@@ -1,9 +1,9 @@
 <?php
-require_once "includes/db.php";
-require_once "equipe.php";
-require_once "joueur.php";
-require_once "personnel.php";
-require_once "appartenance.php";
+include "includes/db.php";
+require_once "classes/Equipe.php";
+require_once "classes/Joueur.php";
+require_once "classes/Personnel.php";
+require_once "classes/Appartenance.php";
 include "includes/header.php";
 
 // Récupérer les joueurs

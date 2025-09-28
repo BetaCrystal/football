@@ -68,10 +68,10 @@ class Appartenance{
                 $all_appartenances = self::getAll($pdo);
                 foreach($all_appartenances as $appartenance){
                         if($appartenance->joueur->id === $playerId){
-                                return "<a href='voir_appartenance.php'>Oui</a>";
+                                return "<a href='voir_appartenance.php?id=$playerId'>Oui</a>";
                         }
                 }
-                return "Non";
+                return "<a href='attribuer_equipe.php?id=$playerId'>Non</a>";
         }
 }
 ?>
