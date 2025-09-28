@@ -1,20 +1,16 @@
 <?php
-class Joueur
-{
-    public int $id;
-    public string $nom;
-    public string $prenom;
-    public DateTime $dateNaissance;
-    public string $photo;
 
-    public function __construct(int $id, string $nom, string $prenom, string $dateNaissance, string $photo)
+require_once 'Personne.php';
+
+class Joueur extends Personne
 {
-    $this->id = $id;
-    $this->nom = $nom;
-    $this->prenom = $prenom;
-    $this->dateNaissance = new DateTime($dateNaissance);
-    $this->photo = $photo;
-}
+    public DateTime $dateNaissance;
+
+        public function __construct(int $id, string $nom, string $prenom, string $dateNaissance, string $photo)
+        {
+                parent::__construct($id, $nom, $prenom, $photo); // Appel du constructeur dans Personne
+                $this->dateNaissance = new DateTime($dateNaissance);
+        }
 
     public static function getAll(PDO $pdo): array
     {

@@ -1,6 +1,6 @@
 <?php
 require_once "includes/db.php";
-require_once "joueur.php";
+require_once "classes/Joueur.php";
 include "includes/header.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

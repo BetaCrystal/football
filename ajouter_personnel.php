@@ -1,7 +1,7 @@
 <?php
 include "includes/db.php";
 include "includes/header.php";
-require_once "personnel.php";
+require_once "classes/Personnel.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
         Personnel::create($pdo, $_POST['nom'], $_POST['prenom'], $_POST['photo'], $_POST['role']);

@@ -1,7 +1,8 @@
 <?php
+
 include "includes/db.php";
 include "includes/header.php";
-require_once "personnel.php";
+require_once "classes/Personnel.php";
 
 //On récupère le personnel par son ID
 $staff = Personnel::getById($pdo, $_GET['id']);

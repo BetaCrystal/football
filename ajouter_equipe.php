@@ -1,7 +1,7 @@
 <?php
 include "includes/db.php";
 include "includes/header.php";
-require_once "equipe.php";
+require_once "classes/Equipe.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nom'])) {
     Equipe::create($pdo, $_POST['nom']);
     header("Location: index.php");
