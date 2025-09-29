@@ -1,10 +1,6 @@
 <?php
-include "includes/db.php";
-require_once "classes/Equipe.php";
-require_once "classes/Joueur.php";
-require_once "classes/Personnel.php";
-require_once "classes/Appartenance.php";
-include "includes/header.php";
+
+include "../src/includes/header.php";
 
 // Récupérer les joueurs
 $players = Joueur::getAll($pdo);

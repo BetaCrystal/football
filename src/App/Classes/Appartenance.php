@@ -1,6 +1,8 @@
 <?php
-require_once "joueur.php";
-require_once "equipe.php";
+
+namespace App\Classes;
+
+include "../includes/header.php";
 
 class Appartenance{
         public string $role;

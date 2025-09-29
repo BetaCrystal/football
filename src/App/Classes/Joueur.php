@@ -1,6 +1,8 @@
 <?php
 
-require_once 'Personne.php';
+namespace App\Classes;
+
+include "../includes/header.php";
 
 class Joueur extends Personne
 {

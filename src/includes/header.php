@@ -1,3 +1,11 @@
+<?php
+
+include "db.php";
+require_once 'Autoloader.php';
+Autoloader::register();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Classes;
+
 class MatchFoot
 {
     public int $id;

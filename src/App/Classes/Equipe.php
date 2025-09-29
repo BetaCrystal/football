@@ -1,5 +1,7 @@
-
 <?php
+
+namespace App\Classes;
+
 class Equipe
 {
     public int $id;
