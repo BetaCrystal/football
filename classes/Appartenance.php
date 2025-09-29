@@ -43,6 +43,22 @@ class Appartenance{
                 return null;
         }
 
+        public static function getByPlayerId(PDO $pdo, int $playerId): array
+        {
+                $sql = "SELECT * FROM player_has_team WHERE player_id = :player_id";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([':player_id' => $playerId]);
+                $appartenances = [];
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $joueur = Joueur::getById($pdo, $row['player_id']);
+                        $equipe = Equipe::getById($pdo, $row['team_id']);
+                        if ($joueur && $equipe) {
+                                $appartenances[] = new Appartenance($row['role'], $joueur, $equipe);
+                        }
+                }
+                return $appartenances;
+        }
+
         public static function create(PDO $pdo, int $playerId, int $teamId, string $role): void
         {
                 $sql = "INSERT INTO player_has_team (player_id, team_id, role) VALUES (:player_id, :team_id, :role)";

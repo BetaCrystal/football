@@ -4,6 +4,7 @@ include "includes/db.php";
 include "includes/header.php";
 require_once "classes/Equipe.php";
 require_once "classes/Joueur.php";
+require_once "classes/Appartenance.php";
 
 $joueur = Joueur::getById($pdo, $_GET['id']);
 $equipes = Equipe::getAll($pdo);
