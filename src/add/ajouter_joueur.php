@@ -1,7 +1,6 @@
 <?php
-require_once "includes/db.php";
-require_once "classes/Joueur.php";
-include "includes/header.php";
+
+include "../includes/header.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     Joueur::create($pdo, $_POST['nom'], $_POST['prenom'], $_POST['birth_date'], $_POST['picture']);

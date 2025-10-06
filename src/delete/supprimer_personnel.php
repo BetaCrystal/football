@@ -1,7 +1,7 @@
 <?php
 
-include "includes/db.php";
-require_once "classes/Personnel.php";
+include "../includes/header.php";
+
 if ($_GET['id']){
         Personnel::delete($pdo, $_GET['id']);
 }

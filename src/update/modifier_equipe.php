@@ -1,7 +1,7 @@
 <?php
-include "includes/db.php";
-include "includes/header.php";
-require_once "classes/Equipe.php";
+
+include "../includes/header.php";
+
 if (!isset($_GET['id'])) {
     die("ID manquant");
 }

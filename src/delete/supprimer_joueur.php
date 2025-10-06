@@ -1,7 +1,6 @@
 <?php
-require_once "includes/db.php";
-require_once "classes/Joueur.php";
 
+include "../includes/header.php";
 
 //FONCTION DE SUPPRESSION D'UN JOUEUR
 function supprimerJoueur(PDO $pdo, int $id): bool {

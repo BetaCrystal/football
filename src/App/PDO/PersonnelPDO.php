@@ -1,18 +1,20 @@
 <?php
 
-require_once 'Personne.php';
+namespace App\PDO;
+use PDO;
+use App\Classes\Personnel;
 
-class Personnel extends Personne
+//include "../includes/header.php";
+
+class PersonnelPDO
 {
-    public string $role;
 
-    public function __construct($id, $nom, $prenom, $role, $photo)
+    public function __construct(private PDO $pdo)
     {
-        parent::__construct($id, $nom, $prenom, $photo);
-        $this->role = $role;
     }
 
-    public static function getAll(PDO $pdo): array
+
+        public static function getAll(PDO $pdo): array
     {
         $stmt = $pdo->query("SELECT * FROM staff_member ORDER BY last_name");
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -29,10 +31,10 @@ class Personnel extends Personne
         return $result;
     }
 
-    public static function getById(PDO $pdo, int $id): ?Personnel
+    public static function getById(PDO $pdo, Personnel $personnel): ?Personnel
     {
         $stmt = $pdo->prepare("SELECT * FROM staff_member WHERE id = :id");
-        $stmt->execute([':id' => $id]);
+        $stmt->execute([':id' => $personnel->getId()]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($row) {
             return new Personnel(
@@ -46,37 +48,37 @@ class Personnel extends Personne
         return null;
     }
 
-    public static function create(PDO $pdo, string $nom, string $prenom, string $photo, string $role): void
+    public static function create(PDO $pdo, Personnel $personnel): void
     {
         $sql = "INSERT INTO staff_member (last_name, first_name, picture, role)
                 VALUES (:nom, :prenom, :photo, :role)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
-            ':nom' => $nom,
-            ':prenom' => $prenom,
-            ':photo' => $photo,
-            ':role' => $role
+            ':nom' => $personnel->getNom(),
+            ':prenom' => $personnel->getPrenom(),
+            ':photo' => $personnel->getPhoto(),
+            ':role' => $personnel->getRole()
         ]);
     }
 
-    public static function update(PDO $pdo, int $id, string $nom, string $prenom, string $photo, string $role): bool
+    public static function update(PDO $pdo, Personnel $personnel): bool
     {
         $sql = "UPDATE staff_member
                 SET last_name = :nom, first_name = :prenom, picture = :photo, role = :role
                 WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         return $stmt->execute([
-            ':nom' => $nom,
-            ':prenom' => $prenom,
-            ':photo' => $photo,
-            ':role' => $role,
-            ':id' => $id
+            ':nom' => $personnel->getNom(),
+            ':prenom' => $personnel->getPrenom(),
+            ':photo' => $personnel->getPhoto(),
+            ':role' => $personnel->getRole(),
+            ':id' => $personnel->getId()
         ]);
     }
 
-    public static function delete(PDO $pdo, int $id): void
+    public static function delete(PDO $pdo, Personnel $personnel): void
     {
         $stmt = $pdo->prepare("DELETE FROM staff_member WHERE id = :id");
-        $stmt->execute([':id' => $id]);
+        $stmt->execute([':id' => $personnel->getId()]);
     }
 }

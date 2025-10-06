@@ -1,24 +1,22 @@
 <?php
-include "includes/db.php";
-require_once "classes/Equipe.php";
-require_once "classes/Joueur.php";
-require_once "classes/Personnel.php";
-require_once "classes/Appartenance.php";
-include "includes/header.php";
+
+include "../src/includes/header.php";
+require_once '../src/includes/Autoloader.php';
+Autoloader::register();
 
 // Récupérer les joueurs
-$players = Joueur::getAll($pdo);
+$players = App\PDO\JoueurPDO::getAll($pdo);
 
 
 // Récupérer les équipes
-$teams = Equipe::getAll($pdo);
+$teams = App\PDO\EquipePDO::getAll($pdo);
 
 // Récupérer le personnel
-$staff = Personnel::getAll($pdo);
+$staff = App\PDO\PersonnelPDO::getAll($pdo);
 
 
 // Récupérer les appartenances
-$appartenances = Appartenance::getAll($pdo);
+$appartenances = App\PDO\AppartenancePDO::getAll($pdo);
 ?>
     <h1>Liste des joueurs</h1>
     <a href="ajouter_joueur.php"> Ajouter un joueur</a>
@@ -45,7 +43,7 @@ $appartenances = Appartenance::getAll($pdo);
                     -
                 <?php endif; ?>
             </td>
-            <td><?= Appartenance::hasTeam($pdo, $player->id) ?></td>
+            <td><?= App\PDO\AppartenancePDO::hasTeam($pdo, $player->id) ?></td>
             <td>
                 <a href="modifier_joueur.php?id=<?= $player->id ?>"> Modifier</a> |
                 <a href="supprimer_joueur.php?id=<?= $player->id ?>" onclick="return confirm('Supprimer ce joueur ?');"> Supprimer</a>

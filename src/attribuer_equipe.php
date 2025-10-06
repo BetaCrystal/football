@@ -1,9 +1,6 @@
 <?php
 
-include "includes/db.php";
 include "includes/header.php";
-require_once "classes/Equipe.php";
-require_once "classes/Joueur.php";
 
 $joueur = Joueur::getById($pdo, $_GET['id']);
 $equipes = Equipe::getAll($pdo);

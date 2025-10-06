@@ -1,9 +1,6 @@
 <?php
 
-include "includes/db.php";
-include "includes/header.php";
-require_once "classes/Joueur.php";
-
+include "../includes/header.php";
 
 $id = $_GET['id'] ?? null;
 if (!$id) {
