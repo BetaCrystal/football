@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Classes;
+namespace App\PDO;
 use PDO;
+use App\Classes\Appartenance;
+use App\Classes\Joueur;
+use App\Classes\Equipe;
 
-include "../includes/header.php";
+//include "../includes/header.php";
 
-class AppartenancePDO extends Appartenance
+class AppartenancePDO
 {
 
             public function __construct(private PDO $pdo)

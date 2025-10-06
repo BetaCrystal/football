@@ -3,7 +3,7 @@
 namespace App\Classes;
 use DateTime;
 
-include "../includes/header.php";
+//include "../includes/header.php";
 
 class Joueur
 {

@@ -5,10 +5,10 @@ class Autoloader
         public static function register()
         {
                 spl_autoload_register(function ($class) {
-                        $file = str_replace('\\', DIRECTORY_SEPARATOR, 'Classes', $class) . '.php';
+                        $file = "../src/".str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
                         if (file_exists($file)) {
                                 require $file;
                         }
                 });
         }
-}
+} //naviguer dans les fichiers : ../ revient 1 fichier en arrière

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Classes;
+namespace App\PDO;
 use PDO;
+use App\Classes\Equipe;
 
-include "../includes/header.php";
+//include "../includes/header.php";
 
-class EquipePDO extends Equipe
+class EquipePDO
 {
     public function __construct(private PDO $pdo)
     {

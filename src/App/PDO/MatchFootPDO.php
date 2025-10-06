@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Classes;
+namespace App\PDO;
 use PDO;
 use PDOException;
+use App\Classes\MatchFoot;
 
-include "../includes/header.php";
+//include "../includes/header.php";
 
-class MatchFootPDO extends MatchFoot
+class MatchFootPDO
 {
 
     public function __construct(private PDO $pdo)

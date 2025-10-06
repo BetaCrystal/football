@@ -2,7 +2,7 @@
 
 namespace App\Classes;
 
-include "../includes/header.php";
+//include "../includes/header.php";
 
 class Equipe
 {

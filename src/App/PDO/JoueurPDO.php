@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Classes;
+namespace App\PDO;
 use PDO;
+use App\Classes\Joueur;
 
-include "../includes/header.php";
+//include "../includes/header.php"; //include seulement dans index
 
-class JoueurPDO extends Joueur
+class JoueurPDO
 {
     public function __construct(private PDO $pdo)
     {

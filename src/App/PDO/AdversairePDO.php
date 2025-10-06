@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Classes;
+namespace App\PDO;
 use PDO;
+use App\Classes\Adversaire;
 
-include "../includes/header.php";
+//include "../includes/header.php";
 
-class AdversairePDO extends Adversaire
+class AdversairePDO
 {
     public function __construct(private PDO $pdo)
     {
