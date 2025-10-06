@@ -4,14 +4,35 @@ namespace App\Classes;
 
 class Adversaire
 {
-        public int $id;
-        public string $adresse;
-        public string $ville;
-
-        public function __construct(int $id, string $adresse, string $ville)
+        public function __construct(protected int $id, protected string $adresse, protected string $ville)
         {
-                $this->id = $id;
+        }
+
+        // GETTERS
+        public function getId(): int
+        {
+                return $this->id;
+        }
+
+        public function getAdresse(): string
+        {
+                return $this->adresse;
+        }
+
+        public function getVille(): string
+        {
+                return $this->ville;
+        }
+
+        //SETTERS
+
+        public function setAdresse(string $adresse)
+        {
                 $this->adresse = $adresse;
+        }
+
+        public function setVille(string $ville)
+        {
                 $this->ville = $ville;
         }
 }

@@ -3,18 +3,18 @@
 include "../src/includes/header.php";
 
 // Récupérer les joueurs
-$players = Joueur::getAll($pdo);
+$players = App\Classes\JoueurPDO::getAll($pdo);
 
 
 // Récupérer les équipes
-$teams = Equipe::getAll($pdo);
+$teams = App\Classes\EquipePDO::getAll($pdo);
 
 // Récupérer le personnel
-$staff = Personnel::getAll($pdo);
+$staff = App\Classes\PersonnelPDO::getAll($pdo);
 
 
 // Récupérer les appartenances
-$appartenances = Appartenance::getAll($pdo);
+$appartenances = App\Classes\AppartenancePDO::getAll($pdo);
 ?>
     <h1>Liste des joueurs</h1>
     <a href="ajouter_joueur.php"> Ajouter un joueur</a>
@@ -41,7 +41,7 @@ $appartenances = Appartenance::getAll($pdo);
                     -
                 <?php endif; ?>
             </td>
-            <td><?= Appartenance::hasTeam($pdo, $player->id) ?></td>
+            <td><?= App\Classes\AppartenancePDO::hasTeam($pdo, $player->id) ?></td>
             <td>
                 <a href="modifier_joueur.php?id=<?= $player->id ?>"> Modifier</a> |
                 <a href="supprimer_joueur.php?id=<?= $player->id ?>" onclick="return confirm('Supprimer ce joueur ?');"> Supprimer</a>

@@ -4,81 +4,54 @@ namespace App\Classes;
 
 include "../includes/header.php";
 
-class Personnel extends Personne
+class Personnel
 {
-    public string $role;
-
-    public function __construct($id, $nom, $prenom, $role, $photo)
+    public function __construct(protected int $id,protected string $nom,protected string $prenom,protected string $role,protected string $photo)
     {
-        parent::__construct($id, $nom, $prenom, $photo);
-        $this->role = $role;
     }
 
-    public static function getAll(PDO $pdo): array
-    {
-        $stmt = $pdo->query("SELECT * FROM staff_member ORDER BY last_name");
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $result = [];
-        foreach ($rows as $row) {
-            $result[] = new Personnel(
-                $row['id'],
-                $row['last_name'],
-                $row['first_name'],
-                $row['role'],
-                $row['picture']
-            );
-        }
-        return $result;
-    }
+    public function getId(): int
+{
+    return $this->id;
+}
 
-    public static function getById(PDO $pdo, int $id): ?Personnel
-    {
-        $stmt = $pdo->prepare("SELECT * FROM staff_member WHERE id = :id");
-        $stmt->execute([':id' => $id]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($row) {
-            return new Personnel(
-                $row['id'],
-                $row['last_name'],
-                $row['first_name'],
-                $row['picture'],
-                $row['role']
-            );
-        }
-        return null;
-    }
+public function getNom(): string
+{
+    return $this->nom;
+}
 
-    public static function create(PDO $pdo, string $nom, string $prenom, string $photo, string $role): void
-    {
-        $sql = "INSERT INTO staff_member (last_name, first_name, picture, role)
-                VALUES (:nom, :prenom, :photo, :role)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([
-            ':nom' => $nom,
-            ':prenom' => $prenom,
-            ':photo' => $photo,
-            ':role' => $role
-        ]);
-    }
+public function setNom(string $nom): void
+{
+    $this->nom = $nom;
+}
 
-    public static function update(PDO $pdo, int $id, string $nom, string $prenom, string $photo, string $role): bool
-    {
-        $sql = "UPDATE staff_member
-                SET last_name = :nom, first_name = :prenom, picture = :photo, role = :role
-                WHERE id = :id";
-        $stmt = $pdo->prepare($sql);
-        return $stmt->execute([
-            ':nom' => $nom,
-            ':prenom' => $prenom,
-            ':photo' => $photo,
-            ':role' => $role,
-            ':id' => $id
-        ]);
-    }
+public function getPrenom(): string
+{
+    return $this->prenom;
+}
 
-    public static function delete(PDO $pdo, int $id): void
-    {
-        $stmt = $pdo->prepare("DELETE FROM staff_member WHERE id = :id");
-        $stmt->execute([':id' => $id]);
-    }
+public function setPrenom(string $prenom): void
+{
+    $this->prenom = $prenom;
+}
+
+public function getRole(): string
+{
+    return $this->role;
+}
+
+public function setRole(string $role): void
+{
+    $this->role = $role;
+}
+
+public function getPhoto(): string
+{
+    return $this->photo;
+}
+
+public function setPhoto(string $photo): void
+{
+    $this->photo = $photo;
+}
 }

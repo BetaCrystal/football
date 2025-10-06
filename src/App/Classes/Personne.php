@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Classes;
-
+/*
 abstract class Personne
 {
         public int $id;
@@ -16,7 +16,7 @@ abstract class Personne
             $this->prenom = $prenom;
             $this->photo = $photo;
         }
-}
+}*/
 
 //rajouter des getters setters pour changer les propriétés en protected
 //faire une classe pdo pour chaque classe
