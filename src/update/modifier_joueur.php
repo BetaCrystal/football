@@ -1,6 +1,7 @@
 <?php
 
 include "../includes/header.php";
+use App\PDO\JoueurPDO;
 
 $id = $_GET['id'] ?? null;
 if (!$id) {
@@ -8,7 +9,7 @@ if (!$id) {
 }
 
 // Récupérer joueur
-$player = Joueur::getById($pdo, $id);
+$player = JoueurPDO::getById($pdo, $id);
 
 if (!$player) {
     die("Joueur introuvable");
@@ -27,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $isValidDate = $d && $d->format('Y-m-d') === $dateNaissance;
 
     if (!empty($nom) && !empty($prenom) && $isValidDate) {
-        if (Joueur::update($pdo, $id, $nom, $prenom, $dateNaissance, $photo)) {
+        if (JoueurPDO::update($pdo, $id, $nom, $prenom, $dateNaissance, $photo)) {
             header("Location: index.php");
             exit;
         } else {
@@ -41,16 +42,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h1>Modifier joueur</h1>
     <form method="post">
         <label>Prénom :</label>
-        <input type="text" name="prenom" value="<?= htmlspecialchars($player->prenom) ?>" required><br>
+        <input type="text" name="prenom" value="<?= htmlspecialchars($player->getPrenom()) ?>" required><br>
 
         <label>Nom :</label>
-        <input type="text" name="nom" value="<?= htmlspecialchars($player->nom) ?>" required><br>
+        <input type="text" name="nom" value="<?= htmlspecialchars($player->getNom()) ?>" required><br>
 
         <label>Date de naissance :</label>
-        <input type="date" name="birth_date" value="<?= $player->dateNaissance->format('Y-m-d') ?>" required><br>
+        <input type="date" name="birth_date" value="<?= $player->getDateNaissance()->format('Y-m-d') ?>" required><br>
 
         <label>Photo (URL) :</label>
-        <input type="text" name="photo" value="<?= htmlspecialchars($player->photo) ?>"><br><br>
+        <input type="text" name="photo" value="<?= htmlspecialchars($player->getPhoto()) ?>"><br><br>
 
         <button type="submit">Enregistrer</button>
     </form>

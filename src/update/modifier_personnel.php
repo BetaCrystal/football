@@ -2,8 +2,10 @@
 
 include "../includes/header.php";
 
+use App\PDO\PersonnelPDO;
+
 //On récupère le personnel par son ID
-$staff = Personnel::getById($pdo, $_GET['id']);
+$staff = PersonnelPDO::getById($pdo, $_GET['id']);
 
 if (!$staff) {
     die("Personnel introuvable");
@@ -18,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ':prenom' => $_POST['prenom'],
             ':role' => $_POST['role'],
             ':photo' => $photo,
-            ':id' => $staff->id
+            ':id' => $staff->getId()
         ]);
         header("Location: index.php");
         exit;
@@ -31,16 +33,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <h1>Modifier le personnel</h1>
 <form method="post" action="">
         <label>Prénom :</label>
-        <input type="text" name="prenom" value="<?= htmlspecialchars($staff->prenom) ?>"><br>
+        <input type="text" name="prenom" value="<?= htmlspecialchars($staff->getPrenom()) ?>"><br>
 
         <label>Nom :</label>
-        <input type="text" name="nom" value="<?= htmlspecialchars($staff->nom) ?>"><br>
+        <input type="text" name="nom" value="<?= htmlspecialchars($staff->getNom()) ?>"><br>
 
         <label>Rôle :</label>
-        <input type="text" name="role" value="<?= htmlspecialchars($staff->role) ?>"><br>
+        <input type="text" name="role" value="<?= htmlspecialchars($staff->getRole()) ?>"><br>
 
         <label>Photo (URL) :</label>
-        <input type="text" name="photo" value="<?= htmlspecialchars($staff->photo) ?>"><br><br>
+        <input type="text" name="photo" value="<?= htmlspecialchars($staff->getPhoto()) ?>"><br><br>
 
         <button type="submit">Enregistrer</button>
 </form>

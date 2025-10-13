@@ -2,7 +2,9 @@
 
 include "includes/header.php";
 
-$appartenances = Appartenance::getByPlayerId($pdo, $_GET['id']);
+use App\PDO\AppartenancePDO;
+
+$appartenances = AppartenancePDO::getByPlayerId($pdo, $_GET['id']);
 
 
 ?>
