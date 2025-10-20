@@ -1,17 +1,18 @@
 <?php
 
 namespace App\Classes;
-use DateTime;
 
-//include "../includes/header.php";
+use DateTime;
 
 class Joueur
 {
-        public function __construct(protected int $id,protected string $nom,protected string $prenom,protected DateTime $dateNaissance,protected string $photo)
-        {
-        }
+    public function __construct(protected int $id,protected string $nom,
+    protected string $prenom,protected DateTime $dateNaissance,protected string $photo)
+    {
 
-// --- GETTERS ---
+    }
+
+    // --- GETTERS ---
     public function getId(): int
     {
         return $this->id;

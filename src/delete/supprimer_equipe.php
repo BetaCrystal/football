@@ -1,9 +1,10 @@
 <?php
 
-include "../includes/header.php";
+use App\PDO\EquipePDO;
 
-if ($_GET['id']){
-        Equipe::delete($pdo, $_GET['id']);
+if ($_GET['id'])
+{
+    EquipePDO::delete($pdo, $_GET['id']);
 }
 
 header("Location: index.php");

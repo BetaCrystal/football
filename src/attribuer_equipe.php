@@ -2,16 +2,21 @@
 
 include "includes/header.php";
 
-$joueur = Joueur::getById($pdo, $_GET['id']);
-$equipes = Equipe::getAll($pdo);
+use App\PDO\JoueurPDO;
+use App\PDO\EquipePDO;
+use App\PDO\AppartenancePDO;
+
+$joueur = JoueurPDO::getById($pdo, $_GET['id']);
+$equipes = EquipePDO::getAll($pdo);
 
 if (!$joueur) {
     echo "Joueur non trouvé.";
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    Appartenance::create($pdo, $joueur->id, $_POST['equipe_id'], $_POST['role']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+    AppartenancePDO::create($pdo, $joueur->id, $_POST['equipe_id'], $_POST['role']);
     header("Location: afficher_attributions.php?joueur_id={$joueur->id}");
     exit;
 }
