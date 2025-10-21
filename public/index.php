@@ -2,6 +2,9 @@
 
 include "../src/includes/header.php";
 require_once '../src/includes/Autoloader.php';
+
+use App\Classes\Joueur;
+
 Autoloader::register();
 
 // Récupérer les joueurs
@@ -32,21 +35,21 @@ $appartenances = App\PDO\AppartenancePDO::getAll($pdo);
         </tr>
         <?php foreach ($players as $player): ?>
         <tr>
-            <td><?= $player->id ?></td>
-            <td><?= htmlspecialchars($player->nom) ?></td>
-            <td><?= htmlspecialchars($player->prenom) ?></td>
-            <td><?= $player->dateNaissance->format('d/m/Y') ?></td>
+            <td><?= $player->getId() ?></td>
+            <td><?= htmlspecialchars($player->getNom()) ?></td>
+            <td><?= htmlspecialchars($player->getPrenom()) ?></td>
+            <td><?= $player->getDateNaissance()->format('d/m/Y') ?></td>
             <td>
-                <?php if (!empty($player->photo)): ?>
-                    <img src="<?= $player->photo ?>" width="50">
+                <?php if (!empty($player->getPhoto())): ?>
+                    <img src="<?= $player->getPhoto() ?>" width="50">
                 <?php else: ?>
                     -
                 <?php endif; ?>
             </td>
-            <td><?= App\PDO\AppartenancePDO::hasTeam($pdo, $player->id) ?></td>
+            <td><?= App\PDO\AppartenancePDO::hasTeam($pdo, $player) ?></td>
             <td>
-                <a href="modifier_joueur.php?id=<?= $player->id ?>"> Modifier</a> |
-                <a href="supprimer_joueur.php?id=<?= $player->id ?>" onclick="return confirm('Supprimer ce joueur ?');"> Supprimer</a>
+                <a href="modifier_joueur.php?id=<?= $player->getId() ?>"> Modifier</a> |
+                <a href="supprimer_joueur.php?id=<?= $player->getId() ?>" onclick="return confirm('Supprimer ce joueur ?');"> Supprimer</a>
             </td>
         </tr>
         <?php endforeach; ?>
@@ -60,11 +63,11 @@ $appartenances = App\PDO\AppartenancePDO::getAll($pdo);
         </tr>
         <?php foreach ($teams as $team): ?>
         <tr>
-            <td><?= $team->id ?></td>
-            <td><?= htmlspecialchars($team->nom) ?></td>
+            <td><?= $team->getId() ?></td>
+            <td><?= htmlspecialchars($team->getNom()) ?></td>
             <td>
-                <a href="modifier_equipe.php?id=<?= $team->id ?>"> Modifier</a> |
-                <a href="supprimer_equipe.php?id=<?= $team->id ?>" onclick="return confirm('Supprimer cette équipe ?');"> Supprimer</a>
+                <a href="modifier_equipe.php?id=<?= $team->getId() ?>"> Modifier</a> |
+                <a href="supprimer_equipe.php?id=<?= $team->getId() ?>" onclick="return confirm('Supprimer cette équipe ?');"> Supprimer</a>
             </td>
         </tr>
         <?php endforeach; ?>
@@ -81,20 +84,20 @@ $appartenances = App\PDO\AppartenancePDO::getAll($pdo);
         </tr>
         <?php foreach ($staff as $member): ?>
         <tr>
-                <td><?= $member->id ?></td>
-                <td><?= htmlspecialchars($member->nom) ?></td>
-                <td><?= htmlspecialchars($member->prenom) ?></td>
-                <td><?= htmlspecialchars($member->role) ?></td>
+                <td><?= $member->getId() ?></td>
+                <td><?= htmlspecialchars($member->getNom()) ?></td>
+                <td><?= htmlspecialchars($member->getPrenom()) ?></td>
+                <td><?= htmlspecialchars($member->getRole()) ?></td>
                 <td>
-                        <?php if (!empty($member->photo)): ?>
-                        <img src="<?= $member->photo ?>" width="50">
+                        <?php if (!empty($member->getPhoto())): ?>
+                        <img src="<?= $member->getPhoto() ?>" width="50">
                         <?php else: ?>
                         -
                         <?php endif; ?>
                 </td>
                 <td>
-                        <a href="modifier_personnel.php?id=<?= $member->id ?>"> Modifier</a> |
-                        <a href="supprimer_personnel.php?id=<?= $member->id ?>" onclick="return confirm('Supprimer ce membre du personnel ?');"> Supprimer</a>
+                        <a href="modifier_personnel.php?id=<?= $member->getId() ?>"> Modifier</a> |
+                        <a href="supprimer_personnel.php?id=<?= $member->getId() ?>" onclick="return confirm('Supprimer ce membre du personnel ?');"> Supprimer</a>
                 </td>
         </tr>
         <?php endforeach; ?>

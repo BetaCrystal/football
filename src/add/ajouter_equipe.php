@@ -2,8 +2,11 @@
 
 include "../includes/header.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nom'])) {
-    Equipe::create($pdo, $_POST['nom']);
+use App\PDO\EquipePDO;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nom']))
+{
+    EquipePDO::create($pdo, $_POST['nom']);
     header("Location: index.php");
     exit;
 }

@@ -4,6 +4,7 @@ namespace App\PDO;
 
 use PDO;
 use App\Classes\Joueur;
+use DateTime;
 class JoueurPDO
 {
     public function __construct(private PDO $pdo)
@@ -22,7 +23,7 @@ class JoueurPDO
                 $row['id'],
                 $row['last_name'],
                 $row['first_name'],
-                $row['birth_date'],
+                new DateTime ($row['birth_date']),
                 $row['picture']
             );
         }
@@ -42,7 +43,7 @@ class JoueurPDO
                 $row['id'],
                 $row['last_name'],
                 $row['first_name'],
-                $row['birth_date'],
+                new DateTime ($row['birth_date']),
                 $row['picture']
             );
         }
@@ -50,11 +51,11 @@ class JoueurPDO
         return null;
     }
 
-    public function create(Joueur $joueur): void // ajouter un nouveau joueur dans la base de données
+    public static function create(PDO $pdo, Joueur $joueur): void // ajouter un nouveau joueur dans la base de données
     {
         $sql = "INSERT INTO player (last_name, first_name, birth_date, picture)
         VALUES (:nom, :prenom, :birth_date, :photo)";
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $joueur->$pdo->prepare($sql);
         $stmt->execute([
             ':nom' => $joueur->getNom(),
             ':prenom' => $joueur->getPrenom(),

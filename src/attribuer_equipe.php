@@ -9,22 +9,24 @@ use App\PDO\AppartenancePDO;
 $joueur = JoueurPDO::getById($pdo, $_GET['id']);
 $equipes = EquipePDO::getAll($pdo);
 
-if (!$joueur) {
+if (!$joueur)
+{
     echo "Joueur non trouvé.";
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
-    AppartenancePDO::create($pdo, $joueur->id, $_POST['equipe_id'], $_POST['role']);
-    header("Location: afficher_attributions.php?joueur_id={$joueur->id}");
+    AppartenancePDO::create($pdo, $joueur, $_POST['equipe_id'], $_POST['role']);
+    header("Location: afficher_attributions.php?joueur_id={$joueur->getId()}");
     exit;
 }
+
 ?>
 
-<h1>Associer <?php echo $joueur->nom; ?> à une équipe</h1>
+<h1>Associer <?php echo $joueur->getNom(); ?> à une équipe</h1>
 <form method="post" action="">
-    <input type="hidden" name="joueur_id" value="<?php echo $joueur->id; ?>">
+    <input type="hidden" name="joueur_id" value="<?php echo $joueur->getId(); ?>">
     <label for="equipe">Choisir une équipe :</label>
     <select name="equipe_id" id="equipe">
         <?php foreach ($equipes as $equipe): ?>

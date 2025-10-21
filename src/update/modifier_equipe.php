@@ -17,7 +17,7 @@ if (!$team)
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nom']))
 {
-    EquipePDO::update($pdo, $team->getId(), $_POST['nom']);
+    EquipePDO::update($pdo, $team, $_POST['nom']);
     header("Location: index.php");
     exit;
 }
