@@ -1,5 +1,5 @@
 <?php
-
+/*
 class Autoloader
 {
     public static function register()
@@ -11,4 +11,4 @@ class Autoloader
             }
         });
     }
-} //naviguer dans les fichiers : ../ revient 1 fichier en arrière
+} //naviguer dans les dossiers : ../ revient 1 dossier en arrière*/

@@ -1,6 +1,6 @@
 <?php
 
-include "../includes/header.php";
+require __DIR__."/../includes/header.php";
 
 use App\PDO\JoueurPDO;
 
