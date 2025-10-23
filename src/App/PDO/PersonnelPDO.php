@@ -1,25 +1,24 @@
 <?php
 
 namespace App\PDO;
+
 use PDO;
 use App\Classes\Personnel;
 
-//include "../includes/header.php";
-
 class PersonnelPDO
 {
-
     public function __construct(private PDO $pdo)
     {
+
     }
 
-
-        public static function getAll(PDO $pdo): array
+    public static function getAll(PDO $pdo): array
     {
         $stmt = $pdo->query("SELECT * FROM staff_member ORDER BY last_name");
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $result = [];
-        foreach ($rows as $row) {
+        foreach ($rows as $row)
+        {
             $result[] = new Personnel(
                 $row['id'],
                 $row['last_name'],
@@ -28,6 +27,7 @@ class PersonnelPDO
                 $row['picture']
             );
         }
+
         return $result;
     }
 
@@ -36,7 +36,9 @@ class PersonnelPDO
         $stmt = $pdo->prepare("SELECT * FROM staff_member WHERE id = :id");
         $stmt->execute([':id' => $personnel->getId()]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($row) {
+        if ($row)
+        {
+
             return new Personnel(
                 $row['id'],
                 $row['last_name'],
@@ -45,13 +47,14 @@ class PersonnelPDO
                 $row['role']
             );
         }
+
         return null;
     }
 
     public static function create(PDO $pdo, Personnel $personnel): void
     {
         $sql = "INSERT INTO staff_member (last_name, first_name, picture, role)
-                VALUES (:nom, :prenom, :photo, :role)";
+        VALUES (:nom, :prenom, :photo, :role)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             ':nom' => $personnel->getNom(),
@@ -64,9 +67,10 @@ class PersonnelPDO
     public static function update(PDO $pdo, Personnel $personnel): bool
     {
         $sql = "UPDATE staff_member
-                SET last_name = :nom, first_name = :prenom, picture = :photo, role = :role
-                WHERE id = :id";
+        SET last_name = :nom, first_name = :prenom, picture = :photo, role = :role
+        WHERE id = :id";
         $stmt = $pdo->prepare($sql);
+
         return $stmt->execute([
             ':nom' => $personnel->getNom(),
             ':prenom' => $personnel->getPrenom(),

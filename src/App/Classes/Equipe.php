@@ -2,12 +2,11 @@
 
 namespace App\Classes;
 
-//include "../includes/header.php";
-
 class Equipe
 {
     public function __construct(protected int $id, protected string $nom)
     {
+
     }
 
     // --- GETTERS ---
@@ -21,11 +20,9 @@ class Equipe
         return $this->nom;
     }
 
-        // --- SETTERS ---
+    // --- SETTERS ---
     public function setNom(string $nom): void
     {
         $this->nom = $nom;
     }
-
-
 }

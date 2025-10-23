@@ -1,0 +1,17 @@
+{
+    "name": "yume/football",
+    "description": "projet football club avec composer",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Yume\\Football\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Eva Valenti",
+            "email": "b.beta.crystal@gmail.com"
+        }
+    ],
+    "require": {}
+}

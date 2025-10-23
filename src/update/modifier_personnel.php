@@ -2,23 +2,30 @@
 
 include "../includes/header.php";
 
-//On récupère le personnel par son ID
-$staff = Personnel::getById($pdo, $_GET['id']);
+use App\PDO\PersonnelPDO;
 
-if (!$staff) {
+//On récupère le personnel par son ID
+$staff = PersonnelPDO::getById($pdo, $_GET['id']);
+
+if (!$staff)
+{
     die("Personnel introuvable");
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (!empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["role"])) {
-        $sql = "UPDATE staff_member SET last_name = :nom, first_name = :prenom, role = :role, picture = :photo WHERE id = :id";
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    if (!empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["role"]))
+    {
+        $sql = "UPDATE staff_member
+        SET last_name = :nom, first_name = :prenom, role = :role, picture = :photo
+        WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             ':nom' => $_POST['nom'],
             ':prenom' => $_POST['prenom'],
             ':role' => $_POST['role'],
             ':photo' => $photo,
-            ':id' => $staff->id
+            ':id' => $staff->getId()
         ]);
         header("Location: index.php");
         exit;
@@ -26,26 +33,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p style='color:red'>Données invalides. Veuillez vérifier les champs.</p>";
     }
 }
-
-?>
-<h1>Modifier le personnel</h1>
-<form method="post" action="">
-        <label>Prénom :</label>
-        <input type="text" name="prenom" value="<?= htmlspecialchars($staff->prenom) ?>"><br>
-
-        <label>Nom :</label>
-        <input type="text" name="nom" value="<?= htmlspecialchars($staff->nom) ?>"><br>
-
-        <label>Rôle :</label>
-        <input type="text" name="role" value="<?= htmlspecialchars($staff->role) ?>"><br>
-
-        <label>Photo (URL) :</label>
-        <input type="text" name="photo" value="<?= htmlspecialchars($staff->photo) ?>"><br><br>
-
-        <button type="submit">Enregistrer</button>
-</form>
-
-
-<?php
-include "includes/footer.php";
-?>
