@@ -30,6 +30,3 @@ if ($id && is_numeric($id))
         .htmlspecialchars($e->getMessage())."</p>";
     }
 }
-
-header("Location: index.php");
-exit;

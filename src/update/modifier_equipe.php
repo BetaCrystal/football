@@ -21,13 +21,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nom']))
     header("Location: index.php");
     exit;
 }
-
-?>
-
-<h1>Modifier une équipe</h1>
-<form method="post" action="">
-        <label>Nom de l'équipe :</label>
-        <input type="text" name="nom" value="<?= htmlspecialchars($team->getNom()) ?>"><br><br>
-        <button type="submit">Enregistrer</button>
-</form>
-<?php include "includes/footer.php"; ?>

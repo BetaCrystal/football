@@ -102,7 +102,7 @@ class AppartenancePDO
         foreach($all_appartenances as $appartenance)
         {
             $joueurId = $joueur->getId();
-            if($appartenance->joueur->id === $joueurId)
+            if($appartenance->joueur->getId() === $joueurId)
             {
                 return "<a href='voir_appartenance.php?id=$joueurId'>Oui</a>";
             }

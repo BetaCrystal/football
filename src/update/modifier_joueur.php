@@ -1,6 +1,7 @@
 <?php
 
 include "../includes/header.php";
+
 use App\PDO\JoueurPDO;
 
 $id = $_GET['id'] ?? null;
@@ -38,24 +39,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         echo "<p style='color:red'>Données invalides. Veuillez vérifier les champs.</p>";
     }
 }
-
-?>
-
-    <h1>Modifier joueur</h1>
-    <form method="post">
-        <label>Prénom :</label>
-        <input type="text" name="prenom" value="<?= htmlspecialchars($player->getPrenom()) ?>" required><br>
-
-        <label>Nom :</label>
-        <input type="text" name="nom" value="<?= htmlspecialchars($player->getNom()) ?>" required><br>
-
-        <label>Date de naissance :</label>
-        <input type="date" name="birth_date" value="<?= $player->getDateNaissance()->format('Y-m-d') ?>" required><br>
-
-        <label>Photo (URL) :</label>
-        <input type="text" name="photo" value="<?= htmlspecialchars($player->getPhoto()) ?>"><br><br>
-
-        <button type="submit">Enregistrer</button>
-    </form>
-</body>
-</html>
