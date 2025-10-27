@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__."/../includes/header.php";
+
 use App\PDO\JoueurPDO;
 
 //FONCTION DE SUPPRESSION D'UN JOUEUR
@@ -30,3 +32,6 @@ if ($id && is_numeric($id))
         .htmlspecialchars($e->getMessage())."</p>";
     }
 }
+
+header("Location: ../../public/index.php");
+exit;

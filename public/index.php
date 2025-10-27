@@ -1,11 +1,6 @@
 <?php
 
-include "../src/includes/header.php";
-require_once '../src/includes/Autoloader.php';
-
-use App\Classes\Joueur;
-
-Autoloader::register();
+require __DIR__."/../src/includes/header.php";
 
 // Récupérer les joueurs
 $players = App\PDO\JoueurPDO::getAll($pdo);

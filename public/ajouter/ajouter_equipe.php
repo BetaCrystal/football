@@ -1,7 +1,6 @@
 <?php
 
-include "../../src/includes/header.php";
-include "../../src/add/ajouter_equipe.php";
+require __DIR__."/../../src/add/ajouter_equipe.php";
 
 ?>
 
