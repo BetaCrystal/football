@@ -1,7 +1,3 @@
 <?php
 
-include "../../src/includes/header.php";
-include "../../src/delete/supprimer_joueur.php";
-
-header("Location: index.php");
-exit;
+require __DIR__."/../../src/delete/supprimer_joueur.php";

@@ -1,7 +1,6 @@
 <?php
 
-//include "../../src/includes/header.php";
-include "../../src/update/modifier_joueur.php";
+require __DIR__."/../../src/update/modifier_joueur.php";
 
 ?>
 

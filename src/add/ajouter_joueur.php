@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__."/../includes/header.php";
+
 use App\PDO\JoueurPDO;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST")
