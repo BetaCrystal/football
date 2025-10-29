@@ -31,10 +31,10 @@ class PersonnelPDO
         return $result;
     }
 
-    public static function getById(PDO $pdo, Personnel $personnel): ?Personnel
+    public static function getById(PDO $pdo, int $id): ?Personnel
     {
         $stmt = $pdo->prepare("SELECT * FROM staff_member WHERE id = :id");
-        $stmt->execute([':id' => $personnel->getId()]);
+        $stmt->execute([':id' => $id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($row)
         {

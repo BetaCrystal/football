@@ -4,7 +4,8 @@ require __DIR__."/../includes/header.php";
 
 use App\PDO\EquipePDO;
 
-if (!isset($_GET['id']))
+$id = $_GET['id'];
+if (!isset($id))
 {
     die("ID manquant");
 }
@@ -17,7 +18,9 @@ if (!$team)
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nom']))
 {
-    EquipePDO::update($pdo, $team, $_POST['nom']);
-    header("Location: index.php");
+    $nom = $_POST['nom'];
+    $nouvEquipe = new App\Classes\Equipe($id, $nom);
+    EquipePDO::update($pdo, $nouvEquipe);
+    header("Location: ../../public/index.php");
     exit;
 }
