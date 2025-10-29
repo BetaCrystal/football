@@ -4,13 +4,13 @@ namespace App\Classes;
 
 class Equipe
 {
-    public function __construct(protected int $id, protected string $nom)
+    public function __construct(protected int|null $id, protected string $nom)
     {
 
     }
 
     // --- GETTERS ---
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
