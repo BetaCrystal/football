@@ -104,10 +104,10 @@ class AppartenancePDO
             $joueurId = $joueur->getId();
             if($appartenance->joueur->getId() === $joueurId)
             {
-                return "<a href='voir_appartenance.php?id=$joueurId'>Oui</a>";
+                return "<a href='afficher_appartenances.php?id=$joueurId'>Oui</a>";
             }
         }
 
-        return "<a href='attribuer_equipe.php?id=$joueurId'>Non</a>";
+        return "<a href='ajouter/ajouter_appartenance.php?id=$joueurId'>Non</a>";
     }
 }
