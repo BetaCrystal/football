@@ -28,9 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $d = DateTime::createFromFormat('Y-m-d', $dateNaissance);
     $isValidDate = $d && $d->format('Y-m-d') === $dateNaissance;
     if (!empty($nom) && !empty($prenom) && $isValidDate) {
-        if (JoueurPDO::update($pdo, $id, $nom, $prenom, $dateNaissance, $photo))
+        $nouvJoueur = new App\Classes\Joueur($id, $nom, $prenom, new DateTime($dateNaissance), $photo);
+        if (JoueurPDO::update($pdo, $nouvJoueur))
         {
-            header("Location: index.php");
+            header("Location: ../../public/index.php");
             exit;
         } else {
             echo "<p style='color:red'>Erreur lors de la mise à jour.</p>";

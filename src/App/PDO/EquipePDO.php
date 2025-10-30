@@ -28,8 +28,8 @@ class EquipePDO
     public static function create(PDO $pdo, Equipe $equipe): void
     {
         $stmt = $pdo->prepare("INSERT INTO team (name)
-        VALUES (:nom) WHERE id = :id;");
-        $stmt->execute([':nom' => $equipe->getNom(), ':id' => $equipe->getId()]);
+        VALUES (:nom);");
+        $stmt->execute([':nom' => $equipe->getNom()]);
     }
 
     public static function delete(PDO $pdo, Equipe $equipe): void

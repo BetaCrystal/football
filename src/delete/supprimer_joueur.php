@@ -10,7 +10,7 @@ function supprimerJoueur(PDO $pdo, int $id): bool
     $joueur = JoueurPDO::getById($pdo, $id); //VERIFICATION SI LE JOUEUR EXISTE
     if ($joueur)
     {
-        JoueurPDO::delete($pdo, $id);
+        JoueurPDO::delete($pdo, $joueur);
 
         return true;
     }

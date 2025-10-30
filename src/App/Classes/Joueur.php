@@ -6,14 +6,14 @@ use DateTime;
 
 class Joueur
 {
-    public function __construct(protected int $id,protected string $nom,
+    public function __construct(protected int|null $id,protected string $nom,
     protected string $prenom,protected DateTime $dateNaissance,protected string $photo)
     {
 
     }
 
     // --- GETTERS ---
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

@@ -55,7 +55,7 @@ class JoueurPDO
     {
         $sql = "INSERT INTO player (last_name, first_name, birth_date, picture)
         VALUES (:nom, :prenom, :birth_date, :photo)";
-        $stmt = $joueur->$pdo->prepare($sql);
+        $stmt = $pdo->prepare($sql);
         $stmt->execute([
             ':nom' => $joueur->getNom(),
             ':prenom' => $joueur->getPrenom(),
@@ -80,9 +80,9 @@ class JoueurPDO
         ]);
     }
 
-    public static function delete(PDO $pdo, int $id): void // supprimer un joueur dans la base de données
+    public static function delete(PDO $pdo, Joueur $joueur): void // supprimer un joueur dans la base de données
     {
         $stmt = $pdo->prepare("DELETE FROM player WHERE id = :id");
-        $stmt->execute([':id' => $id]);
+        $stmt->execute([':id' => $joueur->getId()]);
     }
 }

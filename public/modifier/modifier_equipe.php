@@ -13,6 +13,6 @@ require __DIR__."/../../src/update/modifier_equipe.php";
 
 <?php
 
-include "../../src/includes/footer.php";
+require __DIR__. "/../../src/includes/footer.php";
 
 ?>
