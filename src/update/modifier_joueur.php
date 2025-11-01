@@ -21,8 +21,8 @@ if (!$player)
 //VALIDATIION FORMULAIRE + MISE A JOUR DANS LA BASE DE DONNEES
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
-    $nom = $_POST['prenom'] ?? '';
-    $prenom = $_POST['nom'] ?? '';
+    $nom = $_POST['nom'] ?? '';
+    $prenom = $_POST['prenom'] ?? '';
     $dateNaissance = $_POST['birth_date'] ?? '';
     $photo = $_POST['photo'] ?? '';
     $d = DateTime::createFromFormat('Y-m-d', $dateNaissance);
@@ -40,3 +40,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         echo "<p style='color:red'>Données invalides. Veuillez vérifier les champs.</p>";
     }
 }
+
+
+?>
+
+
+
+<!-- Bouton pour attribuer une équipe à ce joueur -->
+<p>
+    <a href="../ajouter/ajouter_appartenance.php?id=<?= $player->getId() ?>">Attribuer une équipe et un rôle</a>
+</p>
+

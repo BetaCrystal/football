@@ -51,7 +51,7 @@ class JoueurPDO
         return null;
     }
 
-    public static function create(PDO $pdo, Joueur $joueur): void // ajouter un nouveau joueur dans la base de données
+    public static function create(PDO $pdo, Joueur $joueur): void // ajouter un nouveau joueur dans la base de données 
     {
         $sql = "INSERT INTO player (last_name, first_name, birth_date, picture)
         VALUES (:nom, :prenom, :birth_date, :photo)";

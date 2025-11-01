@@ -100,6 +100,7 @@ $appartenances = App\PDO\AppartenancePDO::getAll($pdo);
 
 <?php
 
+
 require __DIR__. "../../src/includes/footer.php";
 
 ?>
