@@ -14,12 +14,12 @@ require __DIR__."/../src/afficher_appartenances.php";
     </tr>
     <?php foreach ($appartenances as $appartenance): ?>
     <tr>
-        <td><?= htmlspecialchars($appartenance->$equipe->getId()) ?></td>
-        <td><?= htmlspecialchars($appartenance->$equipe->getNom()) ?></td>
+        <td><?= htmlspecialchars($appartenance->equipe->getId()) ?></td>
+        <td><?= htmlspecialchars($appartenance->equipe->getNom()) ?></td>
         <td><?= htmlspecialchars($appartenance->getRole()) ?></td>
         <td>
-            <a href="modifier/modifier_appartenance.php?player_id=<?= $appartenance->getJoueur()->getId() ?>&team_id=<?= $appartenance->getEquipe()->getId() ?>"> Modifier</a> |
-            <a href="supprimer/supprimer_appartenance.php?player_id=<?= $appartenance->getJoueur()->getId() ?>&team_id=<?= $appartenance->getEquipe()->getId() ?>" onclick="return confirm('Supprimer cette appartenance ?');"> Supprimer</a>
+            <a href="modifier/modifier_appartenance.php?player_id=<?= $appartenance->joueur->getId() ?>&team_id=<?= $appartenance->equipe->getId() ?>"> Modifier</a> |
+            <a href="supprimer/supprimer_appartenance.php?player_id=<?= $appartenance->joueur->getId() ?>&team_id=<?= $appartenance->equipe->getId() ?>" onclick="return confirm('Supprimer cette appartenance ?');"> Supprimer</a>
         </td>
     </tr>
     <?php endforeach; ?>

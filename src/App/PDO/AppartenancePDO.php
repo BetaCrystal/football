@@ -69,45 +69,64 @@ class AppartenancePDO
         return $appartenances;
     }
 
-    public static function create(PDO $pdo, Joueur $joueur, Equipe $equipe, Appartenance $appartenance): void
+    // Crée une appartenance par identifiants de joueur, d'équipe et rôle
+    public static function create(PDO $pdo, int $playerId, int $teamId, string $role): void
     {
         $sql = "INSERT INTO player_has_team (player_id, team_id, role)
         VALUES (:player_id, :team_id, :role)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([':player_id' => $joueur->getId(),
-        ':team_id' => $equipe->getId(), ':role' => $appartenance->getRole()]);
+        $stmt->execute([':player_id' => $playerId, ':team_id' => $teamId, ':role' => $role]);
     }
 
-    public static function delete(PDO $pdo, Joueur $joueur, Equipe $equipe): void
+    // Supprime une appartenance par identifiants de joueur et d'équipe
+   
+    public static function delete(PDO $pdo, int $playerId, int $teamId): int
     {
         $sql = "DELETE FROM player_has_team
         WHERE player_id = :player_id AND team_id = :team_id";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([':player_id' => $joueur->getId(),
-        ':team_id' => $equipe->getID()]);
+        $stmt->execute([':player_id' => $playerId, ':team_id' => $teamId]);
+
+        return $stmt->rowCount();
     }
 
-    public static function update(PDO $pdo, Joueur $joueur, Equipe $equipe, Appartenance $appartenance): bool
+    // Met à jour une appartenance par identifiants de joueur et d'équipe
+    public static function update(PDO $pdo, int $playerId, int $oldTeamId, int $newTeamId, string $role): bool
     {
-        $sql = "UPDATE player_has_team SET role = :role, team_id = :team_id WHERE player_id = :player_id AND team_id = :team_id";
+        $sql = "UPDATE player_has_team SET role = :role, team_id = :new_team_id WHERE player_id = :player_id AND team_id = :old_team_id";
         $stmt = $pdo->prepare($sql);
 
-        return $stmt->execute([':player_id' => $joueur->getId(),
-        ':team_id' => $equipe->getId(), ':role' => $appartenance->getRole()]);
+        return $stmt->execute([
+            ':player_id' => $playerId,
+            ':old_team_id' => $oldTeamId,
+            ':new_team_id' => $newTeamId,
+            ':role' => $role
+        ]);
     }
 
+    // Vérification si un joueur a une équipe attribuée et retourne une chaîne descriptive
     public static function hasTeam(PDO $pdo, Joueur $joueur): string
     {
-        $all_appartenances = self::getAll($pdo);
-        foreach($all_appartenances as $appartenance)
+        $playerId = $joueur->getId();
+        $appartenances = self::getByPlayerId($pdo, $playerId);
+
+        if (count($appartenances) === 0)
         {
-            $joueurId = $joueur->getId();
-            if($appartenance->joueur->getId() === $joueurId)
+            return 'équipe non attribuée';
+        }
+
+        $parts = [];
+        foreach ($appartenances as $appartenance)
+        {
+            $team = $appartenance->equipe;
+            if ($team)
             {
-                return "<a href='afficher_appartenances.php?id=$joueurId'>Oui</a>";
+                $teamName = $team->getNom();
+                $role = $appartenance->getRole();
+                $parts[] = sprintf('%s (%s)', $teamName, $role);
             }
         }
 
-        return "<a href='ajouter/ajouter_appartenance.php?id=$joueurId'>Non</a>";
+        return implode(', ', $parts);
     }
 }
