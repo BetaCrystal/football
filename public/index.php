@@ -2,6 +2,10 @@
 
 require __DIR__."/../src/includes/header.php";
 
+//Librairies :
+//https://packagist.org/packages/aura/sql
+//https://packagist.org/packages/webmozart/assert
+
 // Récupérer les joueurs
 $players = App\PDO\JoueurPDO::getAll($pdo);
 
