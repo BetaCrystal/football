@@ -13,5 +13,8 @@
             "email": "b.beta.crystal@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "aura/sql": "^6.0",
+        "webmozart/assert": "^1.12"
+    }
 }
